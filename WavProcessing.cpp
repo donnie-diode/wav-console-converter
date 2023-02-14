@@ -551,7 +551,19 @@ int AUDIO_FILE::OpenWavFile(char* filename) {
 
 	cout << "\t" << "length: " << length << endl;
 
-	if (bitsPerSample == 16) {
+	if (bitsPerSample == 8) {
+
+		audioBuffer8 = new int8_t[frames * channels];
+
+		char c[1];
+		for (int i = 0; i < sizeFile; i++) {
+
+			audiofile.read(c, 1);
+			audioBuffer8[i] = (c[0]);
+		}
+
+	}
+	else if (bitsPerSample == 16) {
 
 		if (audioBuffer16 != NULL) {
 		}
